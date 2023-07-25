@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import axios from "axios";
-import { Container } from '@material-ui/core';
+import { Container, Switch } from '@material-ui/core';
 import Header from './components/Header/Header';
+import Definations from './components/Definations/Definations';
 
 function App() {
 
@@ -23,20 +24,50 @@ function App() {
     }
   };
 
-  console.log(meanings);
+  // console.log(meanings);
   
-
   useEffect(() => {
     dictionaryApi();
   }, [word, category]);
 
+  const PurpleSwitch = withStyles({
+    switchBase: {
+      color: grey[50],
+      "&$checked": {
+        color: grey[900],
+      },
+      "&$checked + $track": {
+        backgroundColor: grey[500],
+      },
+    },
+    checked: {},
+    track: {},
+  })(Switch);
+
   return ( <div className="App" style={{height:'100vh', backgroundColor:"#282c34", color:"white"}}>
     <Container maxWidth="md" style={{display:"flex", flexDirection: "column", height:'100vh'}}>
+      
+      <div
+          style={{ position: "absolute", top: 0, right: 15, paddingTop: 10 }}
+        >
+          <span>{LightTheme ? "Dark" : "Light"} Mode</span>
+          <PurpleSwitch
+            checked={LightTheme}
+            onChange={() => setLightTheme(!LightTheme)}
+          />
+      </div>
+
       <Header 
         category={category} 
         setCategory={setCategory} 
         word={word} 
-        setWord={setWord} />
+        setWord={setWord} 
+      />
+
+      {meanings &&
+        <Definations word={word} meanings={meanings} category={category} 
+      />}
+
     </Container>
   </div>
   );
