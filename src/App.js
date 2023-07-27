@@ -3,9 +3,12 @@ import './App.css';
 import axios from 'axios';
 import { Container, Switch } from '@material-ui/core';
 import Header from './components/Header/Header';
+import Footer from "./components/Footer/Footer";
 import Definations from './components/Definations/Definations';
 import grey from '@material-ui/core/colors/grey';
 import { withStyles } from '@material-ui/core/styles';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 
 function App() {
@@ -72,6 +75,7 @@ function App() {
 
         {meanings && <Definations word={word} meanings={meanings} category={category} />}
       </Container>
+      <Footer />
     </div>
   );
 }
